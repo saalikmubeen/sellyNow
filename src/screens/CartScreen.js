@@ -1,11 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
-import { MaterialCommunityIcons } from "@expo/vector-icons"; 
 import { useDispatch, useSelector } from 'react-redux'
 import LottieView from "lottie-react-native";
 import Card from '../components/Card';
 import CartItem from '../components/CartItem';
-import SafeArea from '../components/SafeArea';
 import Colors from '../constants/Colors';
 import { removeFromCart } from "../store/actions/cart";
 
@@ -17,16 +15,6 @@ export default function CartScreen({navigation}) {
 
     if (items.length === 0) {
         return (
-            // <SafeArea>
-            //     <View style={styles.cartIconContainer}>
-            //         <MaterialCommunityIcons
-            //             name="cart-off"
-            //             size={36}
-            //             color={colors.accent}
-            //         />
-            //         <Text>Your cart is empty!</Text>
-            //     </View>
-            // </SafeArea>
 
             <LottieView
                 source={require("../../assets/cart.json")}
@@ -89,10 +77,5 @@ const styles = StyleSheet.create({
     },
     amount: {
         color: Colors.primary,
-    },
-    cartIconContainer: {
-        alignItems: "center",
-        justifyContent: "center",
-        flex: 1
     }
 });

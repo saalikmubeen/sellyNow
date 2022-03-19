@@ -1,11 +1,13 @@
 import React, {  useState } from "react";
 import {useSelector, useDispatch} from "react-redux";
 import { Text, ScrollView, TextInput, View, Button, Image, StyleSheet } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons"; 
 import LottieView from "lottie-react-native"
 import CreditCard from "../components/CreditCard";
 import colors from "../constants/Colors";
 import { addOrder } from '../store/actions/order';
 import { clearCart } from "../store/actions/cart";
+import SafeArea from "../components/SafeArea";
 
 
 function CheckoutScreen({ navigation }) {
@@ -29,6 +31,22 @@ function CheckoutScreen({ navigation }) {
 
         }, 2000)
     };
+
+
+    if (!loading && cart.items.length === 0) {
+        return (
+            <SafeArea>
+                <View style={styles.cartIconContainer}>
+                    <MaterialCommunityIcons
+                        name="cart-off"
+                        size={36}
+                        color={colors.accent}
+                    />
+                    <Text>Your cart is empty!</Text>
+                </View>
+            </SafeArea>
+        );
+    }
 
     if (loading) {
         return (
@@ -155,7 +173,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         marginVertical: 20,
         overflow: "hidden",
-        paddingVertical: 14
+        paddingVertical: 14,
     },
 
     image: {
@@ -166,15 +184,20 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 16,
         textAlign: "center",
-        marginBottom: 13
+        marginBottom: 13,
     },
 
     details: {
         padding: 12,
         paddingBottom: 0,
-        fontSize: 15
-    }
+        fontSize: 15,
+    },
 
+    cartIconContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1,
+    },
 });
 
 export default CheckoutScreen;

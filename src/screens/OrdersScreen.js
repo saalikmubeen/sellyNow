@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, FlatList, Text, View, Button, SafeAreaView, Platform, StatusBar } from 'react-native'
+import { MaterialCommunityIcons } from "@expo/vector-icons"; 
 import { useSelector } from 'react-redux'
 import OrderItem from '../components/OrderItem';
 import Modal from '../components/Modal';
+import SafeArea from "../components/SafeArea"
 import colors from '../constants/Colors';
 
 export default function OrdersScreen({route, navigation}) {
@@ -10,12 +12,6 @@ export default function OrdersScreen({route, navigation}) {
     const [open, setOpen] = useState(false);
     const showPopup = route.params ? route.params.showPopUp : false
 
-
-    if (orders.length === 0) {
-        return <View style={styles.empty}>
-                    <Text>You haven't ordered anything!</Text>
-                </View>
-    }
 
 
     useEffect(() => {
@@ -25,11 +21,28 @@ export default function OrdersScreen({route, navigation}) {
         } 
         timeOut = setTimeout(() => {
             setOpen(true)
-        }, 3000)
+        }, 2000)
 
         return () => clearTimeout(timeOut);
 
     }, [showPopup])
+
+
+    
+    if (orders.length === 0) {
+        return (
+            <SafeArea>
+                <View style={styles.cartIconContainer}>
+                    <MaterialCommunityIcons
+                        name="cart-off"
+                        size={36}
+                        color={colors.accent}
+                    />
+                    <Text>No recent orders!</Text>
+                </View>
+            </SafeArea>
+        );
+    }
     
     return (
         <SafeAreaView style={styles.safeArea}>
@@ -81,16 +94,21 @@ const styles = StyleSheet.create({
     empty: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
     },
     safeArea: {
         flex: 1,
-                paddingTop:
-                    Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
     title: {
         fontSize: 20,
         marginVertical: 13,
-        textAlign: "center"
-    }
-})
+        textAlign: "center",
+    },
+
+    cartIconContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1,
+    },
+});

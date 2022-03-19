@@ -17,7 +17,7 @@ const AddToCartAnimation = (Component) => {
 
             const timeOut = setTimeout(() => {
                 setAddedToCart(false);
-            }, 2500);
+            }, 2000);
 
             return () => clearTimeout(timeOut);
         }, [addedToCart]);
