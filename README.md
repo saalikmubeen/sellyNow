@@ -24,7 +24,7 @@ npm install
 
 ## Usage
 
-1. Start app `nom start`
+1. Start app `npm start`
 
 2. Now you can run the app on your expo mobile app or on ios and android simulator.
 
@@ -38,3 +38,11 @@ npm install
 1. Install 'Expo Go' application on your mobile device from play store.
 2. Click the [link](https://expo.dev/@salikmubeen/selly-now)
    and with an Android or ios phone, you can scan the QR code with your Expo mobile app to load this project and try immediately
+   
+ ## TODO
+
+- [x] Make use of animations
+- [ ] Adding Redux Toolkit: I started with redux, refactoring to redux toolkit would have just wasted time.
+- [ ] Code in Typescript: Wasn't in a mood to define types about everything and get into type checking hell.
+- [ ] Add unit testing: Not a fan testing tbh unless you are working in a team.
+
